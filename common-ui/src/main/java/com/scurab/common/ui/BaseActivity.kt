@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.ViewGroup
 import butterknife.BindView
+import com.scurab.common.utils.isValidPassCode
 import toothpick.Toothpick
 import javax.inject.Inject
 
@@ -22,5 +23,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
         val appScope = Toothpick.openScope(BaseActivity::class)
         Toothpick.inject(this, appScope)
+
+        "".isValidPassCode()
     }
 }

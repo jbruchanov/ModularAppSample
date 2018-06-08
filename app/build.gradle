@@ -51,4 +51,5 @@ dependencies {
     kapt "com.github.stephanenicolas.toothpick:toothpick-compiler:${toothpickLibraryVersion}"
 
     implementation project(path: ':common-ui')
+    implementation project(path: ':common-utils')
 }

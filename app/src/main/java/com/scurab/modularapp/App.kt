@@ -1,6 +1,7 @@
 package com.scurab.modularapp
 
 import android.app.Application
+import com.scurab.common.utils.isValidPassCode
 import toothpick.Toothpick
 import toothpick.configuration.Configuration
 import toothpick.registries.FactoryRegistryLocator
@@ -25,6 +26,6 @@ class App : Application() {
         MemberInjectorRegistryLocator.setRootRegistry(com.scurab.modularapp.MemberInjectorRegistry())
 
         DaggerAppComponent.create().inject(this)
-        core.toString()
+        core.toString().isValidPassCode()
     }
 }
