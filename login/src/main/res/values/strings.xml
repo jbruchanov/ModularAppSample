@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">LoginMy Library</string>
+    <string name="login_continue">Continue to MiActivity</string>
+    <string name="mi_continue">Continue to HomeActivity (Home module)</string>
+</resources>

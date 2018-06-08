@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ModularApp</string>
+    <string name="start_will_redirect_in_3_secs">Will redirect in 3s</string>
+</resources>

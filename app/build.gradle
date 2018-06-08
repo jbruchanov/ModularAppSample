@@ -1,0 +1,99 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.scurab.modularapp"
+        minSdkVersion 14
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions "api"
+
+    buildTypes {
+        release {
+            debuggable false
+        }
+
+        debug {
+            debuggable true
+        }
+    }
+
+    productFlavors {
+        commercial {
+            dimension "api"
+        }
+
+        retail {
+            dimension "api"
+        }
+
+        devCommercial {
+            dimension "api"
+        }
+
+        devRetail {
+            dimension "api"
+        }
+    }
+
+    sourceSets {
+        commercial {
+            setRoot "src/commercial"
+        }
+
+        retail {
+            setRoot "src/retail"
+        }
+
+        devCommercial {
+            setRoot "src/commercial"
+            java.srcDirs = ["src/retail/java", "src/commercial/java", "src/main/java"]
+            res.srcDirs = ["src/retail/res", "src/commercial/res", "src/main/res"]
+        }
+
+        devRetail {
+            setRoot "src/retail"
+            java.srcDirs = ["src/retail/java", "src/commercial/java", "src/main/java"]
+            res.srcDirs = ["src/retail/res", "src/commercial/res", "src/main/res"]
+        }
+    }
+
+    variantFilter { variant ->
+        System.err.println(variant.name)
+        if (variant.name.startsWith("dev") && variant.name.endsWith("Release")) {
+            variant.setIgnore(true)
+        }
+    }
+}
+
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+
+    testImplementation 'junit:junit:4.12'
+
+    implementation "com.google.dagger:dagger:${daggerLibraryVersion}"
+    kapt "com.google.dagger:dagger-compiler:${daggerLibraryVersion}"
+
+    implementation "com.jakewharton:butterknife:${butterKnifeLibraryVersion}"
+    kapt "com.jakewharton:butterknife-compiler:${butterKnifeLibraryVersion}"
+
+    implementation project(path: ':common-ui')
+    implementation project(path: ':common-utils')
+    implementation project(path: ':network')
+    implementation project(path: ':login')
+}

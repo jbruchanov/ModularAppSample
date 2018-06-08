@@ -1,0 +1,109 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    flavorDimensions "api"
+
+    buildTypes {
+        release {
+            debuggable false
+        }
+
+        debug {
+            debuggable true
+        }
+    }
+
+    productFlavors {
+        commercial {
+            dimension "api"
+        }
+
+        retail {
+            dimension "api"
+        }
+
+        devCommercial {
+            dimension "api"
+        }
+
+        devRetail {
+            dimension "api"
+        }
+    }
+
+    sourceSets {
+        commercial {
+            //use default commercial + main
+            //when commercial overrides main
+            //adding setRoot ends up with appt complaining about duplicate assets
+        }
+
+        retail {
+
+        }
+
+        devCommercial {
+            //for same reason, no explicit setRoot as in `commercial` sourceSet
+            //let's add both src folder for eaiser work
+            java.srcDirs += ["src/retail/java", "src/commercial/java"]
+            //add also resources from commercial (overriding values from main)
+            res.srcDirs = ["src/commercial/res"]
+            //we have to add explicit manifest reference, otherwise not merging as we didn't use setRoot
+            manifest.srcFile "src/commercial/AndroidManifest.xml"
+        }
+
+        devRetail {
+            java.srcDirs += ["src/retail/java", "src/commercial/java"]
+            res.srcDirs = ["src/retail/res"]
+            manifest.srcFile "src/retail/AndroidManifest.xml"
+        }
+    }
+
+    variantFilter { variant ->
+        System.err.println(variant.name)
+        if (variant.name.startsWith("dev") && variant.name.endsWith("Release")) {
+            variant.setIgnore(true)
+        }
+    }
+}
+
+kapt {
+    generateStubs = true
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation "com.jakewharton:butterknife:${butterKnifeLibraryVersion}"
+    kapt "com.jakewharton:butterknife-compiler:${butterKnifeLibraryVersion}"
+
+    compileOnly "com.google.dagger:dagger:${daggerLibraryVersion}"
+    kapt "com.google.dagger:dagger-compiler:${daggerLibraryVersion}"
+
+    implementation project(path: ':common-ui')
+    implementation project(path: ':common-utils')
+    implementation project(path: ':common-model')
+}
