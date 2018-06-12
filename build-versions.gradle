@@ -1,6 +1,6 @@
 ext {
     daggerLibraryVersion = '2.16'
-    butterKnifeLibraryVersion = "8.8.1"
+    butterKnifeLibraryVersion = "9.0.0-SNAPSHOT"
     retrofit_lib_version = "2.3.0"
     okhttp3_lib_version = "3.8.1"
 }

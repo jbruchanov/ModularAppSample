@@ -13,19 +13,12 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        releaseBNGA {
-            debuggable true
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            matchingFallbacks = ['release', 'releaseBNGA']
-        }
 
-        releaseRNGA {
-            debuggable true
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            matchingFallbacks = ['release', 'releaseRNGA']
+    flavorDimensions "api"
+
+    buildTypes {
+        release {
+            debuggable false
         }
 
         debug {
@@ -33,18 +26,49 @@ android {
         }
     }
 
+    productFlavors {
+        commercial {
+            dimension "api"
+        }
+
+        retail {
+            dimension "api"
+        }
+
+        devCommercial {
+            dimension "api"
+        }
+
+        devRetail {
+            dimension "api"
+        }
+    }
+
     sourceSets {
-//        main.java.srcDirs += 'src/main/java'
-        releaseBNGA.java.srcDirs += "src/commercial/java"
-        releaseRNGA.java.srcDirs += "src/retail/java"
-        debug.java.srcDirs += "src/commercial/java"
-        debug.java.srcDirs += "src/retail/java"
+        commercial {
+            setRoot "src/commercial"
+        }
+
+        retail {
+            setRoot "src/retail"
+        }
+
+        devCommercial {
+            setRoot "src/commercial"
+            java.srcDirs = ["src/retail/java", "src/commercial/java", "src/main/java"]
+            res.srcDirs = ["src/retail/res", "src/commercial/res", "src/main/res"]
+        }
+
+        devRetail {
+            setRoot "src/retail"
+            java.srcDirs = ["src/retail/java", "src/commercial/java", "src/main/java"]
+            res.srcDirs = ["src/retail/res", "src/commercial/res", "src/main/res"]
+        }
     }
 
     variantFilter { variant ->
-        def build = variant.buildType.name
-        println(build)
-        if (build == "release") {
+        System.err.println(variant.name)
+        if (variant.name.startsWith("dev") && variant.name.endsWith("Release")) {
             variant.setIgnore(true)
         }
     }
@@ -52,7 +76,6 @@ android {
 
 kapt {
     generateStubs = true
-    mapDiagnosticLocations = true
 }
 
 dependencies {
@@ -72,4 +95,5 @@ dependencies {
     implementation project(path: ':common-ui')
     implementation project(path: ':common-utils')
     implementation project(path: ':network')
+    implementation project(path: ':login')
 }

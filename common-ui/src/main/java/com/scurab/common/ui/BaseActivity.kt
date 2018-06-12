@@ -9,23 +9,28 @@ import com.scurab.common.utils.isValidPassCode
 import javax.inject.Inject
 
 
-abstract class BaseActivity : AppCompatActivity() {
+open class BaseActivity : AppCompatActivity() {
 
     @Inject
     internal lateinit var buildConfigWrapper: BuildConfigWrapper
 
-    @BindView(R2.id.fragment_container)
-    lateinit var fragmentContainer: ViewGroup
+    protected class BaseActivityViewHolder {
+        @BindView(R2.id.fragment_container)
+        lateinit var fragmentContainer: ViewGroup
+    }
+
+    protected val baseActivityViewHolder by lazy { BaseActivityViewHolder() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_base)
 
-        ButterKnife.bind(this)
+        setContentView(R.layout.activity_base)
 
         DaggerCommonUiComponent.create().inject(this)
 
         buildConfigWrapper.toString()
         "".isValidPassCode()
+
+        ButterKnife.bind(baseActivityViewHolder, this)
     }
 }

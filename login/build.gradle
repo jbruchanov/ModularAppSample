@@ -1,9 +1,11 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
-
-
 
     defaultConfig {
         minSdkVersion 14
@@ -15,17 +17,11 @@ android {
 
     }
 
-    buildTypes {
-        releaseBNGA {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            matchingFallbacks = ['release']
-        }
+    flavorDimensions "api"
 
-        releaseRNGA {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            matchingFallbacks = ['release']
+    buildTypes {
+        release {
+            debuggable false
         }
 
         debug {
@@ -33,30 +29,73 @@ android {
         }
     }
 
+    productFlavors {
+        commercial {
+            dimension "api"
+        }
+
+        retail {
+            dimension "api"
+        }
+
+        devCommercial {
+            dimension "api"
+        }
+
+        devRetail {
+            dimension "api"
+        }
+    }
+
     sourceSets {
-//        main.java.srcDirs += 'src/main/java'
-        releaseBNGA.java.srcDirs += "src/commercial/java"
-        releaseRNGA.java.srcDirs += "src/retail/java"
-        debug.java.srcDirs += "src/commercial/java"
-        debug.java.srcDirs += "src/retail/java"
+        commercial {
+            setRoot "src/commercial"
+        }
+
+        retail {
+            setRoot "src/retail"
+        }
+
+        devCommercial {
+            setRoot "src/commercial"
+            java.srcDirs = ["src/retail/java", "src/commercial/java", "src/main/java"]
+            res.srcDirs = ["src/retail/res", "src/commercial/res", "src/main/res"]
+        }
+
+        devRetail {
+            setRoot "src/retail"
+            java.srcDirs = ["src/retail/java", "src/commercial/java", "src/main/java"]
+            res.srcDirs = ["src/retail/res", "src/commercial/res", "src/main/res"]
+        }
     }
 
     variantFilter { variant ->
-        def build = variant.buildType.name
-        println(build)
-        if (build == "release") {
+        System.err.println(variant.name)
+        if (variant.name.startsWith("dev") && variant.name.endsWith("Release")) {
             variant.setIgnore(true)
         }
     }
 }
 
+kapt {
+    generateStubs = true
+}
+
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'com.android.support:appcompat-v7:27.1.1'
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation "com.jakewharton:butterknife:${butterKnifeLibraryVersion}"
+    kapt "com.jakewharton:butterknife-compiler:${butterKnifeLibraryVersion}"
+
+    compileOnly "com.google.dagger:dagger:${daggerLibraryVersion}"
+    kapt "com.google.dagger:dagger-compiler:${daggerLibraryVersion}"
 
     implementation project(path: ':common-ui')
     implementation project(path: ':common-utils')

@@ -2,6 +2,6 @@
     package="com.scurab.login">
 
     <application>
-        <activity android:name="com.scurab.login.MiActivity" />
+        <activity android:name=".retail.LoginActivity" />
     </application>
 </manifest>

@@ -26,13 +26,12 @@ android {
 
 kapt {
     generateStubs = true
-    mapDiagnosticLocations = true
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    compileOnly "com.google.dagger:dagger:${daggerLibraryVersion}"
+    implementation "com.google.dagger:dagger:${daggerLibraryVersion}"
     kapt "com.google.dagger:dagger-compiler:${daggerLibraryVersion}"
 
     implementation "com.jakewharton:butterknife:${butterKnifeLibraryVersion}"
