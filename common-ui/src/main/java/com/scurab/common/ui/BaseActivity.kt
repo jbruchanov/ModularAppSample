@@ -23,6 +23,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
         ButterKnife.bind(this)
 
+        DaggerCommonUiComponent.create().inject(this)
+
+        buildConfigWrapper.toString()
         "".isValidPassCode()
     }
 }

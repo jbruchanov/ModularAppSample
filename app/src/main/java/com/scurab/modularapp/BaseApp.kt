@@ -5,12 +5,12 @@ import android.content.Context
 import com.scurab.common.utils.isValidPassCode
 import javax.inject.Inject
 
-class App : Application() {
+abstract class BaseApp : Application() {
 
     @Inject
     lateinit var core: Core
 
-    val appComponent: AppComponent by lazy { DaggerAppComponent.create() }
+    abstract val appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
@@ -20,6 +20,6 @@ class App : Application() {
     }
 }
 
-fun Context.app(): App {
-    return this.applicationContext as App
+fun Context.app(): BaseApp {
+    return this.applicationContext as BaseApp
 }

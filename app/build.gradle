@@ -14,9 +14,38 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+        releaseBNGA {
+            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            matchingFallbacks = ['release', 'releaseBNGA']
+        }
+
+        releaseRNGA {
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            matchingFallbacks = ['release', 'releaseRNGA']
+        }
+
+        debug {
+            debuggable true
+        }
+    }
+
+    sourceSets {
+//        main.java.srcDirs += 'src/main/java'
+        releaseBNGA.java.srcDirs += "src/commercial/java"
+        releaseRNGA.java.srcDirs += "src/retail/java"
+        debug.java.srcDirs += "src/commercial/java"
+        debug.java.srcDirs += "src/retail/java"
+    }
+
+    variantFilter { variant ->
+        def build = variant.buildType.name
+        println(build)
+        if (build == "release") {
+            variant.setIgnore(true)
         }
     }
 }
@@ -40,7 +69,7 @@ dependencies {
     implementation "com.jakewharton:butterknife:${butterKnifeLibraryVersion}"
     kapt "com.jakewharton:butterknife-compiler:${butterKnifeLibraryVersion}"
 
-    implementation project(path: ':network')
     implementation project(path: ':common-ui')
     implementation project(path: ':common-utils')
+    implementation project(path: ':network')
 }

@@ -1,9 +1,10 @@
 package com.scurab.modularapp
 
-import dagger.Component
+import com.scurab.network.RestAPI
 
-@Component(modules = [AppModule::class])
 interface AppComponent {
     fun inject(startActivity: StartActivity)
-    fun inject(app: App)
+    fun inject(app: BaseApp)
+
+    fun provideAPI() : RestAPI
 }

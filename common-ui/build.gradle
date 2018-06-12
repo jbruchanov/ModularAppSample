@@ -32,7 +32,7 @@ kapt {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "com.google.dagger:dagger:${daggerLibraryVersion}"
+    compileOnly "com.google.dagger:dagger:${daggerLibraryVersion}"
     kapt "com.google.dagger:dagger-compiler:${daggerLibraryVersion}"
 
     implementation "com.jakewharton:butterknife:${butterKnifeLibraryVersion}"
