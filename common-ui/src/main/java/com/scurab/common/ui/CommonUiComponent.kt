@@ -1,8 +1,8 @@
 package com.scurab.common.ui
 
-//import dagger.Component
+import dagger.Component
 
-//@Component(modules = [ComponentUiModule::class])
+@Component
 interface CommonUiComponent {
-//    fun inject(baseActivity: BaseActivity)
+    fun inject(baseActivity: BaseActivity)
 }

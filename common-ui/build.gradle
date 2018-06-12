@@ -14,12 +14,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [ toothpick_registry_package_name : 'com.scurab.common.ui' ]
-            }
-        }
     }
 
     buildTypes {
@@ -38,11 +32,8 @@ kapt {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-//    implementation "com.google.dagger:dagger:${daggerLibraryVersion}"
-//    kapt "com.google.dagger:dagger-compiler:${daggerLibraryVersion}"
-
-    implementation "com.github.stephanenicolas.toothpick:toothpick-runtime:${toothpickLibraryVersion}"
-    kapt "com.github.stephanenicolas.toothpick:toothpick-compiler:${toothpickLibraryVersion}"
+    implementation "com.google.dagger:dagger:${daggerLibraryVersion}"
+    kapt "com.google.dagger:dagger-compiler:${daggerLibraryVersion}"
 
     implementation "com.jakewharton:butterknife:${butterKnifeLibraryVersion}"
     kapt "com.jakewharton:butterknife-compiler:${butterKnifeLibraryVersion}"
