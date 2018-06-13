@@ -28,7 +28,7 @@ class StartActivity : BaseActivity() {
 
         TextView(this).apply {
             setText(R.string.start_will_redirect_in_3_secs)
-            baseActivityViewHolder.fragmentContainer.addView(this)
+            fragmentContainer.addView(this)
         }
     }
 

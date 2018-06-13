@@ -12,6 +12,14 @@
         android:textSize="@dimen/text_large"
         tools:text="Class name" />
 
+    <!-- title is also activity field -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_large"
+        tools:text="Class name" />
+
     <Button
         android:id="@+id/login_continue"
         android:layout_width="match_parent"

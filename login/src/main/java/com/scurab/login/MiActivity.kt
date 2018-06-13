@@ -18,7 +18,7 @@ internal class MiActivity : BaseActivity() {
         Button(this).apply {
             setText(R.string.mi_continue)
             layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            baseActivityViewHolder.fragmentContainer.addView(this)
+            fragmentContainer.addView(this)
             setOnClickListener {
                 loginNavigation.openHomeScreen()
                 finish()
