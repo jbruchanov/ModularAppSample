@@ -22,6 +22,7 @@ abstract class BaseApp : Application(),
         core.toString().isValidPassCode()
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T : IComponent> provideComponent(): T {
         return appComponent as T
     }

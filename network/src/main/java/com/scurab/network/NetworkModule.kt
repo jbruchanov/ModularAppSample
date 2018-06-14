@@ -1,8 +1,6 @@
 package com.scurab.network
 
-import com.scurab.common.utils.IComponent
-import com.scurab.common.utils.SecurityCore
-import com.scurab.common.utils.SecurityCoreComponent
+import com.scurab.common.utils.*
 import com.scurab.model.Arrangement
 import com.scurab.model.Empty
 import dagger.Component
@@ -10,7 +8,8 @@ import dagger.Module
 import dagger.Provides
 import io.reactivex.Observable
 
-@Component(dependencies = [SecurityCoreComponent::class], modules = [NetworkModule::class])
+@PerApp
+@Component(modules = [SecurityCoreModule::class, NetworkModule::class])
 interface NetworkComponent : IComponent {
     fun provideServerAPI(): RestAPI
 }
@@ -18,8 +17,11 @@ interface NetworkComponent : IComponent {
 @Module
 class NetworkModule {
 
-    private val serverApi by lazy {
-        object : RestAPI {
+    @PerApp
+    @Provides
+    fun provideServerAPI(securityCore: SecurityCore): RestAPI {
+        securityCore.toString()
+        return object : RestAPI {
             override fun login(username: String, password: String): Observable<Empty> {
                 return Observable.empty<Empty>()
             }
@@ -28,11 +30,5 @@ class NetworkModule {
                 return Observable.empty<List<Arrangement>>()
             }
         }
-    }
-
-    @Provides
-    fun provideServerAPI(securityCore: SecurityCore): RestAPI {
-        securityCore.toString()
-        return serverApi
     }
 }

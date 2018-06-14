@@ -4,7 +4,6 @@ import android.content.Intent
 import com.scurab.common.utils.SecurityCore
 import com.scurab.home.HomeActivity
 import com.scurab.login.LoginNavigation
-import com.scurab.login.commercial.LoginActivity
 import com.scurab.modularapp.BaseAppModule
 import dagger.Module
 import dagger.Provides
@@ -21,7 +20,7 @@ class AppModule(private val app: CommercialApp) : BaseAppModule(SecurityCore()) 
     fun provideLoginNavigation(): LoginNavigation {
         return object : LoginNavigation {
             override fun openLoginScreen() {
-                app.startActivity(Intent(app, LoginActivity::class.java))
+                app.startActivity(Intent(app, com.scurab.login.commercial.LoginActivity::class.java))
             }
 
             override fun openHomeScreen() {

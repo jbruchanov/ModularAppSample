@@ -18,6 +18,7 @@ class SecurityCore {
     }
 }
 
+@PerApp
 @Component(modules = [SecurityCoreModule::class])
 interface SecurityCoreComponent : IComponent {
     fun provideSecurityCore(): SecurityCore
@@ -28,6 +29,6 @@ open class SecurityCoreModule {
 
     @Provides
     open fun provideSecurityCore(): SecurityCore {
-        TODO()
+        TODO("This is created in application object, must be overridden")
     }
 }
