@@ -2,7 +2,6 @@ package com.scurab.modularapp
 
 import com.scurab.common.utils.SecurityCore
 import com.scurab.network.NetworkModule
-import com.scurab.network.RestAPI
 import dagger.Module
 import dagger.Provides
 

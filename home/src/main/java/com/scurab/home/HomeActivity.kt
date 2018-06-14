@@ -2,13 +2,13 @@ package com.scurab.home
 
 import android.os.Bundle
 import com.scurab.common.ui.BaseActivity
-import com.scurab.network.HasNetworkComponent
+import com.scurab.common.utils.ComponentProvider
 import javax.inject.Inject
 
 class HomeActivity : BaseActivity() {
 
     @Inject
-    lateinit var presenter: HomePresenter
+    internal lateinit var presenter: HomePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +16,7 @@ class HomeActivity : BaseActivity() {
 
         DaggerHomeComponent
                 .builder()
-                .networkComponent((applicationContext as HasNetworkComponent).networkComponent)
+                .networkComponent((applicationContext as ComponentProvider).provideComponent())
                 .build()
                 .inject(this)
     }

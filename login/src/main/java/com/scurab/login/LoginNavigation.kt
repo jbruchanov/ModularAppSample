@@ -1,5 +1,6 @@
 package com.scurab.login
 
+import com.scurab.common.utils.IComponent
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -11,9 +12,9 @@ interface LoginNavigation {
 
 
 @Component(modules = [LoginNavigationModule::class])
-interface LoginNavigationComponent {
+interface LoginNavigationComponent : IComponent {
 
-    fun providesLoginNavigation() : LoginNavigation
+    fun providesLoginNavigation(): LoginNavigation
 }
 
 @Module
@@ -23,8 +24,4 @@ open class LoginNavigationModule {
     open fun provideLoginNavigation(): LoginNavigation {
         TODO()
     }
-}
-
-interface HasLoginNavigationComponent {
-    val loginNavigationComponent: LoginNavigationComponent
 }

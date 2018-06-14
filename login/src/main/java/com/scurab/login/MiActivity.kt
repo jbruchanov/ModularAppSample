@@ -5,8 +5,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
 import com.scurab.common.ui.BaseActivity
-import com.scurab.common.utils.HasComponent
-import com.scurab.common.utils.HasSecurityCoreComponent
+import com.scurab.common.utils.ComponentProvider
 import com.scurab.common.utils.SecurityCore
 import javax.inject.Inject
 
@@ -21,10 +20,11 @@ class MiActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val componentProvider = applicationContext as ComponentProvider
         DaggerLoginComponent
                 .builder()
-                .securityCoreComponent((application as HasSecurityCoreComponent).securityCoreComponent)
-                .loginNavigationComponent((application as HasLoginNavigationComponent).loginNavigationComponent)
+                .securityCoreComponent(componentProvider.provideComponent())
+                .loginNavigationComponent(componentProvider.provideComponent())
                 .build()
                 .inject(this)
 

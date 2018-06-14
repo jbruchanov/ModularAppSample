@@ -1,7 +1,7 @@
 package com.scurab.modularapp.retail
 
-import com.scurab.modularapp.BaseApp
 import com.scurab.modularapp.AppComponent
+import com.scurab.modularapp.BaseApp
 
 class RetailApp : BaseApp() {
 

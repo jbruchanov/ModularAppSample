@@ -19,7 +19,7 @@ class SecurityCore {
 }
 
 @Component(modules = [SecurityCoreModule::class])
-interface SecurityCoreComponent {
+interface SecurityCoreComponent : IComponent {
     fun provideSecurityCore(): SecurityCore
 }
 
@@ -30,8 +30,4 @@ open class SecurityCoreModule {
     open fun provideSecurityCore(): SecurityCore {
         TODO()
     }
-}
-
-interface HasSecurityCoreComponent {
-    val securityCoreComponent: SecurityCoreComponent
 }

@@ -1,7 +1,6 @@
 package com.scurab.modularapp
 
 import android.os.Bundle
-import android.widget.FrameLayout
 import android.widget.TextView
 import com.scurab.common.ui.BaseActivity
 import com.scurab.login.LoginNavigation

@@ -1,5 +1,6 @@
 package com.scurab.network
 
+import com.scurab.common.utils.IComponent
 import com.scurab.common.utils.SecurityCore
 import com.scurab.common.utils.SecurityCoreComponent
 import com.scurab.model.Arrangement
@@ -10,7 +11,7 @@ import dagger.Provides
 import io.reactivex.Observable
 
 @Component(dependencies = [SecurityCoreComponent::class], modules = [NetworkModule::class])
-interface NetworkComponent {
+interface NetworkComponent : IComponent {
     fun provideServerAPI(): RestAPI
 }
 
@@ -34,8 +35,4 @@ class NetworkModule {
         securityCore.toString()
         return serverApi
     }
-}
-
-interface HasNetworkComponent {
-    val networkComponent: NetworkComponent
 }
