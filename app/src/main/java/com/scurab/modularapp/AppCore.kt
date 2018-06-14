@@ -2,7 +2,7 @@ package com.scurab.modularapp
 
 import javax.inject.Inject
 
-class Core @Inject constructor() {
+class AppCore @Inject constructor() {
 
     fun doCoreStuff() {
 

@@ -14,7 +14,7 @@ class StartActivity : BaseActivity() {
     lateinit var serverAPI: RestAPI
 
     @Inject
-    lateinit var core: Core
+    lateinit var core: AppCore
 
     @Inject
     lateinit var loginNavigation: LoginNavigation

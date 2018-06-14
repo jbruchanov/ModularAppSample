@@ -31,11 +31,11 @@ kapt {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_lib_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_lib_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_lib_version"
-    implementation "com.squareup.okhttp3:okhttp:$okhttp3_lib_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_lib_version"
+    api "com.squareup.retrofit2:retrofit:$retrofit_lib_version"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_lib_version"
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofit_lib_version"
+    api "com.squareup.okhttp3:okhttp:$okhttp3_lib_version"
+    api "com.squareup.okhttp3:logging-interceptor:$okhttp3_lib_version"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
@@ -44,5 +44,6 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
 
-    implementation project(path: ':common-model')
+    api project(path: ':common-model')
+    api project(path: ':common-utils')
 }

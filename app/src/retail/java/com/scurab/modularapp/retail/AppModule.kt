@@ -1,13 +1,16 @@
 package com.scurab.modularapp.retail
 
 import android.content.Intent
+import com.scurab.common.utils.SecurityCore
+import com.scurab.home.HomeActivity
 import com.scurab.login.LoginNavigation
 import com.scurab.login.retail.LoginActivity
+import com.scurab.modularapp.BaseAppModule
 import dagger.Module
 import dagger.Provides
 
 @Module
-class AppModule(private val app: RetailApp) {
+class AppModule(private val app: RetailApp) : BaseAppModule(SecurityCore()) {
 
     @Provides
     fun app(): RetailApp {
@@ -22,7 +25,7 @@ class AppModule(private val app: RetailApp) {
             }
 
             override fun openHomeScreen() {
-                TODO()
+                app.startActivity(Intent(app, HomeActivity::class.java))
             }
         }
     }

@@ -15,7 +15,6 @@ abstract class BaseLoginActivity : BaseActivity() {
         //presumably because we are in different project-module
         View.inflate(this, R.layout.activity_login, fragmentContainer)
 
-
         //view with id title no accessible here as `title` as BaseLoginActivity has title property
         login_title.text = this::class.java.name.toString()
         login_continue.setOnClickListener {

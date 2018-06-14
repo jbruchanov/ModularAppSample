@@ -5,7 +5,7 @@ import com.scurab.modularapp.AppComponent
 
 class CommercialApp : BaseApp() {
     override val appComponent: AppComponent
-        get() = DaggerCommercialAppComponent
+        = DaggerCommercialAppComponent
                 .builder()
                 .appModule(AppModule(this))
                 .build()

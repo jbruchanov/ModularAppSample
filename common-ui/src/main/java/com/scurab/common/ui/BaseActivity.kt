@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.ViewGroup
 import com.scurab.common.utils.isValidPassCode
-import javax.inject.Inject
-
 import kotlinx.android.synthetic.main.activity_base.*
+import javax.inject.Inject
 
 open class BaseActivity : AppCompatActivity() {
 
@@ -21,7 +20,10 @@ open class BaseActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_base)
 
-        DaggerCommonUiComponent.create().inject(this)
+        DaggerCommonUiComponent
+                .builder()
+                .build()
+                .inject(this)
 
         fragment_container.toString()
         buildConfigWrapper.toString()
