@@ -23,8 +23,8 @@ class MiActivity : BaseActivity() {
         val componentProvider = applicationContext as ComponentProvider
         DaggerLoginComponent
                 .builder()
-                .securityCoreComponent(componentProvider.provideComponent())
-                .loginNavigationComponent(componentProvider.provideComponent())
+                .securityCoreProvider(componentProvider.getProvider())
+                .loginNavigationProvider(componentProvider.getProvider())
                 .build()
                 .inject(this)
 

@@ -1,9 +1,5 @@
 package com.scurab.common.utils
 
-import dagger.Component
-import dagger.Module
-import dagger.Provides
-
 class SecurityCore {
 
     init {
@@ -18,17 +14,6 @@ class SecurityCore {
     }
 }
 
-@PerApp
-@Component(modules = [SecurityCoreModule::class])
-interface SecurityCoreComponent : IComponent {
+interface SecurityCoreProvider : IProvider {
     fun provideSecurityCore(): SecurityCore
-}
-
-@Module
-open class SecurityCoreModule {
-
-    @Provides
-    open fun provideSecurityCore(): SecurityCore {
-        TODO("This is created in application object, must be overridden")
-    }
 }

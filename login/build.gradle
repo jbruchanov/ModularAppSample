@@ -59,7 +59,7 @@ android {
 
         devCommercial {
             //for same reason, no explicit setRoot as in `commercial` sourceSet
-            //let's add both src folder for eaiser work
+            //let's add both src folder for easier work
             java.srcDirs += ["src/retail/java", "src/commercial/java"]
             //add also resources from commercial (overriding values from main)
             res.srcDirs = ["src/commercial/res"]

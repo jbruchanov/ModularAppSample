@@ -16,7 +16,7 @@ class HomeActivity : BaseActivity() {
 
         DaggerHomeComponent
                 .builder()
-                .networkComponent((applicationContext as ComponentProvider).provideComponent())
+                .networkComponent((applicationContext as ComponentProvider).getComponent())
                 .build()
                 .inject(this)
     }

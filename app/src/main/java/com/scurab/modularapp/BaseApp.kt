@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.scurab.common.utils.ComponentProvider
 import com.scurab.common.utils.IComponent
+import com.scurab.common.utils.IProvider
 import com.scurab.common.utils.isValidPassCode
 import javax.inject.Inject
 
@@ -23,7 +24,12 @@ abstract class BaseApp : Application(),
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : IComponent> provideComponent(): T {
+    override fun <T : IComponent> getComponent(): T {
+        return appComponent as T
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : IProvider> getProvider(): T {
         return appComponent as T
     }
 }

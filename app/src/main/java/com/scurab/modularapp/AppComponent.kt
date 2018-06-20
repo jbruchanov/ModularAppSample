@@ -1,16 +1,18 @@
 package com.scurab.modularapp
 
-import com.scurab.common.utils.SecurityCoreComponent
-import com.scurab.login.LoginNavigationComponent
+import com.scurab.common.utils.PerUser
+import com.scurab.common.utils.SecurityCoreProvider
+import com.scurab.login.LoginNavigationProvider
 import com.scurab.network.NetworkComponent
-import com.scurab.network.RestAPI
+import dagger.Component
 
 interface AppComponent :
-        LoginNavigationComponent,
-        SecurityCoreComponent,
+        LoginNavigationProvider,
+        SecurityCoreProvider,
         NetworkComponent {
+
     fun inject(startActivity: StartActivity)
     fun inject(app: BaseApp)
 
-    fun provideAPI(): RestAPI
+}
 }
