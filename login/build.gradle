@@ -14,6 +14,12 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [toothpick_registry_package_name: "com.scurab.login"]
+            }
+        }
+
     }
 
     flavorDimensions "api"
@@ -98,6 +104,9 @@ dependencies {
 
     compileOnly "com.google.dagger:dagger:${daggerLibraryVersion}"
     kapt "com.google.dagger:dagger-compiler:${daggerLibraryVersion}"
+
+    implementation "com.github.stephanenicolas.toothpick:toothpick-runtime:${toothpickLibraryVersion}"
+    kapt "com.github.stephanenicolas.toothpick:toothpick-compiler:${toothpickLibraryVersion}"
 
     implementation project(path: ':common-ui')
     implementation project(path: ':common-utils')

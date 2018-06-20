@@ -10,7 +10,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class AppModule(private val app: CommercialApp) : BaseAppModule(SecurityCore()) {
+class AppModule(private val app: CommercialApp, securityCore: SecurityCore) : BaseAppModule(securityCore) {
 
     @Provides
     fun app(): CommercialApp {

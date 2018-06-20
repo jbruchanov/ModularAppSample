@@ -12,6 +12,15 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        def packages = ["com.scurab.common.ui", "com.scurab.network", "com.scurab.login", "com.scurab.home"]
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [toothpick_registry_package_name          : "com.scurab.modularapp",
+                             toothpick_registry_children_package_names: packages.join(",")
+                ]
+            }
+        }
     }
 
     flavorDimensions "api"
@@ -89,8 +98,8 @@ dependencies {
     implementation "com.google.dagger:dagger:${daggerLibraryVersion}"
     kapt "com.google.dagger:dagger-compiler:${daggerLibraryVersion}"
 
-    implementation "com.jakewharton:butterknife:${butterKnifeLibraryVersion}"
-    kapt "com.jakewharton:butterknife-compiler:${butterKnifeLibraryVersion}"
+    implementation "com.github.stephanenicolas.toothpick:toothpick-runtime:${toothpickLibraryVersion}"
+    kapt "com.github.stephanenicolas.toothpick:toothpick-compiler:${toothpickLibraryVersion}"
 
     implementation project(path: ':common-ui')
     implementation project(path: ':common-utils')

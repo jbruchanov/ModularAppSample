@@ -3,7 +3,9 @@ package com.scurab.modularapp
 import android.os.Bundle
 import android.widget.TextView
 import com.scurab.common.ui.BaseActivity
+import com.scurab.common.utils.Config
 import com.scurab.login.LoginNavigation
+import com.scurab.model.ToothpickScopes
 import com.scurab.network.RestAPI
 import javax.inject.Inject
 
@@ -18,11 +20,16 @@ class StartActivity : BaseActivity() {
     @Inject
     lateinit var loginNavigation: LoginNavigation
 
+    override val toothpickScopes: Array<Any> = arrayOf(ToothpickScopes.app, *super.toothpickScopes)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         title = "StartActivity"
 
-        app().appComponent.inject(this)
+        if (Config.useDagger) {
+            app().appComponent.inject(this)
+        } //else inject()
+
         serverAPI.toString()
 
         TextView(this).apply {

@@ -6,7 +6,9 @@ import android.widget.Button
 import android.widget.FrameLayout
 import com.scurab.common.ui.BaseActivity
 import com.scurab.common.utils.ComponentProvider
+import com.scurab.common.utils.Config
 import com.scurab.common.utils.SecurityCore
+import com.scurab.model.ToothpickScopes
 import com.scurab.model.User
 import com.scurab.model.UserUpdateListener
 import javax.inject.Inject
@@ -22,17 +24,21 @@ class MiActivity : BaseActivity() {
     @Inject
     lateinit var user: User
 
+    override val toothpickScopes: Array<Any> = arrayOf(ToothpickScopes.app, ToothpickScopes.user, this::class.java.name)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val componentProvider = applicationContext as ComponentProvider
-        DaggerLoginComponent
-                .builder()
-                .securityCoreProvider(componentProvider.getProvider())
-                .loginNavigationProvider(componentProvider.getProvider())
-                .userProvider(componentProvider.getProvider())
-                .build()
-                .inject(this)
+        if (Config.useDagger) {
+            val componentProvider = applicationContext as ComponentProvider
+            DaggerLoginComponent
+                    .builder()
+                    .securityCoreProvider(componentProvider.getProvider())
+                    .loginNavigationProvider(componentProvider.getProvider())
+                    .userProvider(componentProvider.getProvider())
+                    .build()
+                    .inject(this)
+        } //else inject()
 
 
         Button(this).apply {
