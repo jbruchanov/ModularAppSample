@@ -1,6 +1,7 @@
 package com.scurab.modularapp.commercial
 
 import android.content.Intent
+import com.scurab.common.utils.PerApp
 import com.scurab.common.utils.SecurityCore
 import com.scurab.home.HomeActivity
 import com.scurab.login.LoginNavigation
@@ -16,6 +17,7 @@ class AppModule(private val app: CommercialApp) : BaseAppModule(SecurityCore()) 
         return app
     }
 
+    @PerApp
     @Provides
     fun provideLoginNavigation(): LoginNavigation {
         return object : LoginNavigation {

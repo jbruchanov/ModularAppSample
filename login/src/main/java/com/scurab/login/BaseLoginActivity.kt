@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.scurab.common.ui.BaseActivity
+import com.scurab.model.User
 import kotlinx.android.synthetic.main.activity_login.*
+import javax.inject.Inject
 
 abstract class BaseLoginActivity : BaseActivity() {
 

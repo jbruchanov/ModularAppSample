@@ -5,4 +5,5 @@ apply plugin: 'kotlin-kapt'
 sourceCompatibility = 1.8
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':common-utils')
 }
